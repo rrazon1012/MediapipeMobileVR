@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44402248, g: 0.49316555, b: 0.5722324, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 275874969}
   - component: {fileID: 275874968}
   - component: {fileID: 275874970}
+  - component: {fileID: 275874971}
   m_Layer: 0
   m_Name: Solution
   m_TagString: Untagged
@@ -172,6 +173,7 @@ MonoBehaviour:
   _gpuConfig: {fileID: 4900000, guid: d1c2a5074cb12172d9cbc3098fe038ba, type: 3}
   _openGlEsConfig: {fileID: 4900000, guid: 155e81a0de3136db88c8ac8c72fad8b7, type: 3}
   _timeoutMicrosec: 50000
+  modelComplexity: 1
   maxNumHands: 2
   OnPalmDetectectionsOutput:
     m_PersistentCalls:
@@ -180,6 +182,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnHandLandmarksOutput:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHandWorldLandmarksOutput:
     m_PersistentCalls:
       m_Calls: []
   OnHandRectsFromLandmarksOutput:
@@ -221,6 +226,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolSize: 10
+--- !u!114 &275874971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275874966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b984b546aeeea1e4db0cb6302e8f15ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &296605791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -582,6 +599,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8571076842338426121, guid: 140d1d2c406167c50819d89f86d9092e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8571076842338426122, guid: 140d1d2c406167c50819d89f86d9092e,
         type: 3}
@@ -1022,6 +1044,9 @@ GameObject:
   - component: {fileID: 1264297881}
   - component: {fileID: 1264297880}
   - component: {fileID: 1264297879}
+  - component: {fileID: 1264297884}
+  - component: {fileID: 1264297883}
+  - component: {fileID: 1264297882}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1094,6 +1119,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1264297882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264297878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebfb4b86b2e54606894da54f755db2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1264297883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264297878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Device: 0
+  m_PoseSource: 2
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
+--- !u!124 &1264297884
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264297878}
+  m_Enabled: 1
 --- !u!1001 &1465467705
 PrefabInstance:
   m_ObjectHideFlags: 0
