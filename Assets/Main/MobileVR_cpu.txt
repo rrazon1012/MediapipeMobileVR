@@ -1,0 +1,39 @@
+#
+#
+#
+#
+# Mediapipe graph for getting the hand
+
+# in progress
+# - getting palm detection working
+
+# Changes
+
+#CPU image
+input_stream: "input_video"
+
+input_side_packet: "num_hands"
+
+output_stream: "handedness"
+output_stream: "palm_detections"
+output_stream: "hand_rects_from_palm_detections"
+
+node: {
+  calculator: "ImageTransformationCalculator"
+  input_stream: "IMAGE:input_video"
+  input_side_packet: "ROTATION_DEGREES:input_rotation"
+  input_side_packet: "FLIP_HORIZONTALLY:input_horizontally_flipped"
+  input_side_packet: "FLIP_VERTICALLY:input_vertically_flipped"
+  output_stream: "IMAGE:transformed_input_video"
+}
+
+# Detects/tracks hand landmarks.
+node {
+  calculator: "HandLandmarkTrackingCpu"
+  input_stream: "IMAGE:transformed_input_video"
+  input_side_packet: "MODEL_COMPLEXITY:model_complexity"
+  input_side_packet: "NUM_HANDS:num_hands"
+  output_stream: "HANDEDNESS:handedness"
+  output_stream: "PALM_DETECTIONS:palm_detections"
+  output_stream: "HAND_ROIS_FROM_PALM_DETECTIONS:hand_rects_from_palm_detections"
+}

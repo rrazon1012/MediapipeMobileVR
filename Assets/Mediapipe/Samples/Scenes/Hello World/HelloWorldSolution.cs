@@ -61,7 +61,7 @@ namespace Mediapipe.Unity.HelloWorld
         {
           // When running synchronously, wait for the outputs here (blocks the main thread).
           var output = _graphRunner.FetchNextValue();
-          Logger.Log("HelloWorld (Sync)", output);
+          Logger.Log("This is where the packets are being checked", output);
         }
 
         yield return new WaitForEndOfFrame();
