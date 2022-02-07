@@ -85,7 +85,7 @@ public class MobileVRGraph : GraphRunner
     Debug.Log(handRectsFromPalmDetections != null);
     Debug.Log(handedness != null);*/
 
-    return new MobileVRValue(palmDetections, handRectsFromPalmDetections, handedness);
+    return null; //new MobileVRValue(palmDetections, handRectsFromPalmDetections, handedness);
   }
 
   //request the assets required for landmarks, handedness, palm detection

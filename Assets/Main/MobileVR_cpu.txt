@@ -5,14 +5,21 @@
 # Mediapipe graph for getting the hand
 
 # in progress
-# - getting palm detection working
+#
 
 # Changes
+# - palm detection
 
 #CPU image
 input_stream: "input_video"
 
 input_side_packet: "num_hands"
+
+# 2d hand landmarks NormalizedLandmarkList
+output_stream: "hand_landmarks"
+
+#3d hand landmarks LandmarkList
+output_stream: "hand_world_landmarks"
 
 output_stream: "handedness"
 output_stream: "palm_detections"
@@ -33,6 +40,8 @@ node {
   input_stream: "IMAGE:transformed_input_video"
   input_side_packet: "MODEL_COMPLEXITY:model_complexity"
   input_side_packet: "NUM_HANDS:num_hands"
+  output_stream: "WORLD_LANDMARKS:hand_world_landmarks"
+  output_stream: "LANDMARKS:hand_landmarks"
   output_stream: "HANDEDNESS:handedness"
   output_stream: "PALM_DETECTIONS:palm_detections"
   output_stream: "HAND_ROIS_FROM_PALM_DETECTIONS:hand_rects_from_palm_detections"

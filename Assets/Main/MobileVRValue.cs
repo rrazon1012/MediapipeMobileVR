@@ -9,13 +9,17 @@ public class MobileVRValue
 {
   public readonly List<Detection> palmDetections;
   public readonly List<NormalizedRect> handRectsFromPalmDetections;
+  public readonly List<LandmarkList> handWorldLandmarks;
+  public readonly List<NormalizedLandmarkList> handLandmarks;
   public readonly List<ClassificationList> handedness;
 
-  public MobileVRValue(List<Detection> palmDetections, List<NormalizedRect> handRectsFromPalmDetections, List<ClassificationList> handedness)
+  public MobileVRValue(List<Detection> palmDetections, List<NormalizedRect> handRectsFromPalmDetections, List<LandmarkList> handWorldLandmarks, List<NormalizedLandmarkList> handLandmarks, List<ClassificationList> handedness)
   {
     this.palmDetections = palmDetections;
     this.handRectsFromPalmDetections = handRectsFromPalmDetections;
     this.handedness = handedness;
+    this.handWorldLandmarks = handWorldLandmarks;
+    this.handLandmarks = handLandmarks;
   }
 
   //public readonly List<Detection> palmDetections;
