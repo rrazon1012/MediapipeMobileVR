@@ -740,8 +740,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382691577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.01, z: 0}
-  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalScale: {x: 0.4, y: 9, z: 1}
   m_Children: []
   m_Father: {fileID: 1209126113}
   m_RootOrder: 0
@@ -2254,7 +2254,7 @@ MonoBehaviour:
   _handLandmarksAnnotationController: {fileID: 732114693}
   _graphRunner: {fileID: 1187984276}
   _textureFramePool: {fileID: 1187984273}
-  modelComplexity: 0
+  modelComplexity: 1
   maxNumHands: 2
   timeoutMillisec: 25
 --- !u!114 &1187984276
@@ -2273,7 +2273,7 @@ MonoBehaviour:
   _gpuConfig: {fileID: 4900000, guid: f70b2aaa38603d6469c92a899704554b, type: 3}
   _openGlesConfig: {fileID: 0}
   _timeoutMicrosec: 25000
-  modelComplexity: 0
+  modelComplexity: 1
   maxNumhands: 2
   OnPalmDetectionsOutput:
     m_PersistentCalls:

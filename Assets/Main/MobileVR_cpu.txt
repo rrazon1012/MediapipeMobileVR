@@ -25,9 +25,20 @@ output_stream: "handedness"
 output_stream: "palm_detections"
 output_stream: "hand_rects_from_palm_detections"
 
+node {
+  calculator: "FlowLimiterCalculator"
+  input_stream: "input_video"
+  input_stream: "FINISHED:palm_detections"
+  input_stream_info: {
+    tag_index: "FINISHED"
+    back_edge: true
+  }
+  output_stream: "throttled_input_video"
+}
+
 node: {
   calculator: "ImageTransformationCalculator"
-  input_stream: "IMAGE:input_video"
+  input_stream: "IMAGE:throttled_input_video"
   input_side_packet: "ROTATION_DEGREES:input_rotation"
   input_side_packet: "FLIP_HORIZONTALLY:input_horizontally_flipped"
   input_side_packet: "FLIP_VERTICALLY:input_vertically_flipped"

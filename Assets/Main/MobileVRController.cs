@@ -87,40 +87,24 @@ public class MobileVRController : Controller
             /////////////////////////////////////////////////////////////////////////////
 
             landmarks[i] = new Vector3(handValues.handWorldLandmarks[0].Landmark[i].X * scale * negate,
-              handValues.handWorldLandmarks[0].Landmark[i].Y * -scale, handValues.handWorldLandmarks[0].Landmark[i].Z * scale) - bottomLeft;
+              handValues.handWorldLandmarks[0].Landmark[i].Y * -scale, handValues.handWorldLandmarks[0].Landmark[i].Z * scale * 1.5f) - bottomLeft;
           }
 
           cube[5].transform.localPosition = new Vector3(handValues.handWorldLandmarks[0].Landmark[5].X * scale * negate,
               handValues.handWorldLandmarks[0].Landmark[5].Y * -scale, handValues.handWorldLandmarks[0].Landmark[5].Z * scale) - bottomLeft;
           cube[5].transform.position += new Vector3(screenOffset.x * 40 * negate, screenOffset.y * -20);
 
+          //get the vector from index finger tip to index finger base
+          var dir = landmarks[(int)LANDMARK.INDEX_FINGER_TIP] - landmarks[(int)LANDMARK.INDEX_FINGER_MCP];
+
+          //var mid = (dir / 2.0f) + landmarks[(int)LANDMARK.INDEX_FINGER_MCP];
+
+          cube[5].transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+
           //cube[0].transform.position = new Vector3(offset.X, offset.Y, offset.Z) * scale;
 
           GetGestures(landmarks);
 
-          /*if (isThumbUp)
-          {
-            Debug.Log("Thumb Up");
-          }
-          if (isIndexUp)
-          {
-            Debug.Log("Index Up");
-          }
-
-          if (isMiddleUp)
-          {
-            Debug.Log("Middle Up");
-          }
-          
-          if (isRingUp)
-          {
-            Debug.Log("Ring Up");
-          }
-          
-          if (isPinkyUp)
-          {
-            Debug.Log("Pinky Up");
-          }*/
           gestureText.text = "None";
 
           if (isIndexUp && isMiddleUp && !isRingUp && !isPinkyUp)
@@ -141,14 +125,8 @@ public class MobileVRController : Controller
             gestureText.text = "Fist";
           }
 
-          isThumbUp = false;
-          isIndexUp = false;
-          isMiddleUp = false;
-          isRingUp = false;
-          isPinkyUp = false;
-          isUpright = true;
-
-}
+          resetGestures();
+        }
       }
       yield return new WaitForEndOfFrame();
     }

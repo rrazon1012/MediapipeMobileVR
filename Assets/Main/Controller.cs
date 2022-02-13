@@ -92,7 +92,8 @@ public class Controller : MonoBehaviour
   {
     if(landmarks[(int)LANDMARK.WRIST].y > landmarks[(int)LANDMARK.MIDDLE_FINGER_MCP].y)
     {
-      isUpright = true;
+      isUpright = false;
+      Debug.Log("Not Upright");
     }
 
     if (isUpright)
@@ -142,5 +143,15 @@ public class Controller : MonoBehaviour
       }
     }
 
+  }
+
+  protected void resetGestures()
+  {
+    isThumbUp = false;
+    isIndexUp = false;
+    isMiddleUp = false;
+    isRingUp = false;
+    isPinkyUp = false;
+    isUpright = true;
   }
 }
