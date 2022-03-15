@@ -100,7 +100,13 @@ public class MobileVRController : Controller
           //var mid = (dir / 2.0f) + landmarks[(int)LANDMARK.INDEX_FINGER_MCP];
 
           cube[5].transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+          cube[5].transform.rotation *= Quaternion.Euler(new Vector3(30 * negate, 0, 0));
+          
+          //cube[5].transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
 
+          //Vector3 currentOffset = cube[5].transform.InverseTransformPoint(landmarks[(int)LANDMARK.INDEX_FINGER_MCP]);
+          //Vector3 targetOffset = cube[5].transform.InverseTransformPoint(landmarks[(int)LANDMARK.INDEX_FINGER_TIP]);
+          //cube[5].transform.rotation = Quaternion.FromToRotation(currentOffset, targetOffset);
           //cube[0].transform.position = new Vector3(offset.X, offset.Y, offset.Z) * scale;
 
           GetGestures(landmarks);

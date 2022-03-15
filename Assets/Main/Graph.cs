@@ -94,14 +94,14 @@ public class Graph : MonoBehaviour
 
   //output streams names from the graph
   private const string _palmDetectionStreamName = "palm_detections";
-  private const string _handRectsFromPalmDetectionsStreamName = "hand_rects_from_palm_detections";
+  private const string _handRectsFromLandmarksStreamName = "hand_rects_from_landmarks";
   private const string _HandWorldLandmarksStreamName = "hand_world_landmarks";
   private const string _HandLandmarksStreamName = "hand_landmarks";
   private const string _handednessStreamName = "handedness";
 
   //output streams for the graph
   private OutputStream<DetectionVectorPacket, List<Detection>> _palmDetectionsStream;
-  private OutputStream<NormalizedRectVectorPacket, List<NormalizedRect>> _handRectsFromPalmDetectionsStream;
+  private OutputStream<NormalizedRectVectorPacket, List<NormalizedRect>> _handRectsFromLandmarksStream;
   private OutputStream<NormalizedLandmarkListVectorPacket, List<NormalizedLandmarkList>> _handLandmarksStream;
   private OutputStream<LandmarkListVectorPacket, List<LandmarkList>> _handWorldLandmarksStream;
   private OutputStream<ClassificationListVectorPacket, List<ClassificationList>> _handednessStream;
@@ -115,7 +115,7 @@ public class Graph : MonoBehaviour
     InitializeOutputStreams();
 
     _palmDetectionsStream.StartPolling(true).AssertOk();
-    _handRectsFromPalmDetectionsStream.StartPolling(true).AssertOk();
+    _handRectsFromLandmarksStream.StartPolling(true).AssertOk();
     _handLandmarksStream.StartPolling(true).AssertOk();
     _handWorldLandmarksStream.StartPolling(true).AssertOk();
     _handednessStream.StartPolling(true).AssertOk();
@@ -172,7 +172,7 @@ public class Graph : MonoBehaviour
   public MobileVRValue FetchNextValue()
   {
     var _ = _palmDetectionsStream.TryGetNext(out var palmDetections);
-    _ = _handRectsFromPalmDetectionsStream.TryGetNext(out var handRectsFromPalmDetections);
+    _ = _handRectsFromLandmarksStream.TryGetNext(out var handRectsFromPalmDetections);
     _ = _handWorldLandmarksStream.TryGetNext(out var handWorldLandmarks);
     _ = _handLandmarksStream.TryGetNext(out var handLandmarks);
     _ = _handednessStream.TryGetNext(out var handedness);
@@ -205,7 +205,7 @@ public class Graph : MonoBehaviour
   protected void InitializeOutputStreams()
   {
     _palmDetectionsStream = new OutputStream<DetectionVectorPacket, List<Detection>>(calculatorGraph, _palmDetectionStreamName);
-    _handRectsFromPalmDetectionsStream = new OutputStream<NormalizedRectVectorPacket, List<NormalizedRect>>(calculatorGraph, _handRectsFromPalmDetectionsStreamName);
+    _handRectsFromLandmarksStream = new OutputStream<NormalizedRectVectorPacket, List<NormalizedRect>>(calculatorGraph, _handRectsFromLandmarksStreamName);
     _handWorldLandmarksStream = new OutputStream<LandmarkListVectorPacket, List<LandmarkList>>(calculatorGraph, _HandWorldLandmarksStreamName);
     _handLandmarksStream = new OutputStream<NormalizedLandmarkListVectorPacket, List<NormalizedLandmarkList>>(calculatorGraph, _HandLandmarksStreamName);
     _handednessStream = new OutputStream<ClassificationListVectorPacket, List<ClassificationList>>(calculatorGraph, _handednessStreamName);
