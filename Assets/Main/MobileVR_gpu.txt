@@ -1,0 +1,55 @@
+# Input image. (ImageFrame)
+input_stream: "input_video"
+
+input_side_packet: "num_hands"
+
+output_stream: "hand_world_landmarks"
+
+output_stream: "hand_landmarks"
+
+output_stream: "palm_detections"
+
+output_stream: "handedness"
+output_stream: "palm_detections"
+output_stream: "hand_rects_from_landmarks"
+
+#necessary for platforms that use GPU instead of cpu
+
+node {
+  calculator: "FlowLimiterCalculator"
+  input_stream: "input_video"
+  input_stream: "FINISHED:palm_detections"
+  input_stream_info: {
+    tag_index: "FINISHED"
+    back_edge: true
+  }
+  output_stream: "throttled_input_video"
+}
+
+node: {
+  calculator: "ImageFrameToGpuBufferCalculator"
+  input_stream: "throttled_input_video"
+  output_stream: "throttled_input_video_gpu"
+}
+
+node: {
+  calculator: "ImageTransformationCalculator"
+  input_stream: "IMAGE_GPU:throttled_input_video_gpu"
+  input_side_packet: "ROTATION_DEGREES:input_rotation"
+  input_side_packet: "FLIP_HORIZONTALLY:input_horizontally_flipped"
+  input_side_packet: "FLIP_VERTICALLY:input_vertically_flipped"
+  output_stream: "IMAGE_GPU:transformed_input_video"
+}
+
+# Detects/tracks hand landmarks.
+node {
+  calculator: "HandLandmarkTrackingGpu"
+  input_stream: "IMAGE:transformed_input_video"
+  input_side_packet: "MODEL_COMPLEXITY:model_complexity"
+  input_side_packet: "NUM_HANDS:num_hands"
+  output_stream: "LANDMARKS:hand_landmarks"
+  output_stream: "WORLD_LANDMARKS:hand_world_landmarks"
+  output_stream: "HANDEDNESS:handedness"
+  output_stream: "PALM_DETECTIONS:palm_detections"
+  output_stream: "HAND_ROIS_FROM_LANDMARKS:hand_rects_from_landmarks"
+}

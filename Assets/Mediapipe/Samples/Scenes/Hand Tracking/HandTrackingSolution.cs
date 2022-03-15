@@ -143,6 +143,7 @@ namespace Mediapipe.Unity.HandTracking
 
           // When running synchronously, wait for the outputs here (blocks the main thread).
           var value = _graphRunner.FetchNextValue();
+          //Debug.Log(value.palmDetections[0].ToString());
           _palmDetectionsAnnotationController.DrawNow(value.palmDetections);
           _handRectsFromPalmDetectionsAnnotationController.DrawNow(value.handRectsFromPalmDetections);
           _handLandmarksAnnotationController.DrawNow(value.handLandmarks, value.handedness);

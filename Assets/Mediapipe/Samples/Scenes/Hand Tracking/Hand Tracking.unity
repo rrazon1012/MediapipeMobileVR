@@ -212,7 +212,7 @@ MonoBehaviour:
   _handRectsFromLandmarksAnnotationController: {fileID: 841116730}
   _graphRunner: {fileID: 275874968}
   _textureFramePool: {fileID: 275874970}
-  runningMode: 0
+  runningMode: 1
 --- !u!114 &275874970
 MonoBehaviour:
   m_ObjectHideFlags: 0
