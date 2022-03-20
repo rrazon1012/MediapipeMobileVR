@@ -13,21 +13,26 @@ public class ObjectSpawner : MonoBehaviour
 
   public float minTime = 0.2f;
   public float maxTime = 1.0f;
-  public float GameTime = 240.0f;
-
+  public float gameTime = 60.0f;
+  public float currTime = 0;
+  private Coroutine routine;
   // Start is called before the first frame update
   private void Start()
   {
-    StartCoroutine(SpawnObjects());
+    routine = StartCoroutine(SpawnObjects());
+  }
+
+  void Update()
+  {
+    currTime -= Time.deltaTime;
   }
 
   public IEnumerator SpawnObjects()
   {
-    var startTime = Time.deltaTime;
-
-    while (true)
+    currTime = gameTime;
+    while (currTime > 0)
     {
-
+      Debug.Log(currTime);
       //for adding delays between object spawns
       float delay = Random.Range(minTime, maxTime);
 

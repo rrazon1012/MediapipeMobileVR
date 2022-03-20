@@ -90,7 +90,7 @@ public class MobileVRController : Controller
               handValues.handWorldLandmarks[0].Landmark[i].Y * -scale, handValues.handWorldLandmarks[0].Landmark[i].Z * scale * 1.5f) - bottomLeft;
           }
 
-          cube[5].transform.localPosition = new Vector3(handValues.handWorldLandmarks[0].Landmark[5].X * scale * negate,
+          cube[5].transform.position = new Vector3(handValues.handWorldLandmarks[0].Landmark[5].X * scale * negate,
               handValues.handWorldLandmarks[0].Landmark[5].Y * -scale, handValues.handWorldLandmarks[0].Landmark[5].Z * scale) - bottomLeft;
           cube[5].transform.position += new Vector3(screenOffset.x * 40 * negate, screenOffset.y * -20);
 
