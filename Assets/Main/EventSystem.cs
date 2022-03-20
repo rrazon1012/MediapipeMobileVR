@@ -17,6 +17,12 @@ public class EventSystem : MonoBehaviour
   {
     onGameStart?.Invoke();
   }
+  
+  public event Action onGameEnd;
+  public void GameEnd()
+  {
+    onGameEnd?.Invoke();
+  }
 
   public event Action onFruitHit;
   public void FruitHit()
@@ -27,5 +33,11 @@ public class EventSystem : MonoBehaviour
   public void BombHit()
   {
     onFruitHit?.Invoke();
+  }
+
+  public event Action<ObjectInfo> onObjectHit;
+  public void ObjectHit(ObjectInfo obj)
+  {
+    onObjectHit(obj);
   }
 }

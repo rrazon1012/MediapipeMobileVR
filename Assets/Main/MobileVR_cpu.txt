@@ -28,7 +28,7 @@ output_stream: "hand_rects_from_landmarks"
 node {
   calculator: "FlowLimiterCalculator"
   input_stream: "input_video"
-  input_stream: "FINISHED:palm_detections"
+  input_stream: "FINISHED:hand_world_landmarks"
   input_stream_info: {
     tag_index: "FINISHED"
     back_edge: true

@@ -13,26 +13,29 @@ public class ObjectSpawner : MonoBehaviour
 
   public float minTime = 0.2f;
   public float maxTime = 1.0f;
-  public float gameTime = 60.0f;
-  public float currTime = 0;
+  
   private Coroutine routine;
   // Start is called before the first frame update
   private void Start()
   {
-    routine = StartCoroutine(SpawnObjects());
+    //routine = StartCoroutine(SpawnObjects());
+    EventSystem.current.GameStart();
   }
 
-  void Update()
+  //void Update()
+  //{
+  //  currTime -= Time.deltaTime;
+  //}
+
+  public void Play() 
   {
-    currTime -= Time.deltaTime;
+    routine = StartCoroutine(SpawnObjects());
   }
 
   public IEnumerator SpawnObjects()
   {
-    currTime = gameTime;
-    while (currTime > 0)
+    while (GameManager.GM.currTime > 0)
     {
-      Debug.Log(currTime);
       //for adding delays between object spawns
       float delay = Random.Range(minTime, maxTime);
 
@@ -40,7 +43,7 @@ public class ObjectSpawner : MonoBehaviour
 
       int spawnIndex = Random.Range(0, spawnPoints.Length);
 
-      var obj = Instantiate(objects[Random.Range(0,objects.Length)], spawnPoints[spawnIndex]);
+      var obj = Instantiate(objects[Random.Range(0, objects.Length)], spawnPoints[spawnIndex]);
       Destroy(obj, 5.0f);
     }
   }

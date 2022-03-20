@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GameCanvas : MonoBehaviour
+{
+
+  [SerializeField]
+  private Text score;
+  [SerializeField]
+  private Text timer;
+
+  // Update is called once per frame
+  void Update()
+  {
+    //score
+    score.text = "X " + GameManager.GM.currentScore;
+
+    var time = GameManager.GM.currTime;
+
+    //timer
+    var min = Mathf.FloorToInt(time / 60.0f);
+    var seconds = Mathf.FloorToInt(time % 60.0f);
+
+    timer.text = min.ToString("00") + ":" + seconds.ToString("00");
+  }
+}

@@ -18,7 +18,6 @@ public class Object : MonoBehaviour
 
   private void Update()
   {
-    
   }
 
   private void OnTriggerEnter(Collider other)
@@ -31,6 +30,8 @@ public class Object : MonoBehaviour
       //else { }
 
       AudioSource.PlayClipAtPoint(objectInfo.objectSound, transform.position, 0.5f);
+
+      EventSystem.current.ObjectHit(objectInfo);
 
       var obj = Instantiate(altPrefab, transform.position, transform.rotation);
       Destroy(obj, 5.0f);
