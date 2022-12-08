@@ -1,14 +1,4 @@
-#
-#
-#
-#
 # Mediapipe graph for getting the hand
-
-# in progress
-#
-
-# Changes
-# - palm detection
 
 #CPU image
 input_stream: "input_video"

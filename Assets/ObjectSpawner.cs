@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-  //public GameObject[] objectPrefabs;
-  //public string[] objectTypes;
 
   public GameObject[] objects;
-
   public Transform[] spawnPoints;
 
   public float minTime = 0.2f;
   public float maxTime = 1.0f;
   
-  private Coroutine routine;
   // Start is called before the first frame update
   private void Start()
   {
     //routine = StartCoroutine(SpawnObjects());
-    EventSystem.current.GameStart();
+    //EventSystem.current.GameStart();
   }
 
   //void Update()
@@ -27,9 +23,12 @@ public class ObjectSpawner : MonoBehaviour
   //  currTime -= Time.deltaTime;
   //}
 
-  public void Play() 
+  public void Play()
   {
-    routine = StartCoroutine(SpawnObjects());
+    if (routine == null)
+    {
+      routine = StartCoroutine(SpawnObjects());
+    }
   }
 
   public IEnumerator SpawnObjects()
@@ -46,5 +45,8 @@ public class ObjectSpawner : MonoBehaviour
       var obj = Instantiate(objects[Random.Range(0, objects.Length)], spawnPoints[spawnIndex]);
       Destroy(obj, 5.0f);
     }
+    EventSystem.current.GameEnd();
+
+    routine = null;
   }
 }

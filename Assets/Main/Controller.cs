@@ -59,7 +59,6 @@ public class Controller : MonoBehaviour
     //if the handvalue is null wait for it to be set to know that solution is continously fetching packets
     yield return new WaitWhile(() => solution.handValues == null);
 
-    Debug.Log("Start controlling object with hand landmarks");
     Play();
   }
 

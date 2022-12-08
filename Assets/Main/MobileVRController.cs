@@ -16,7 +16,7 @@ public class MobileVRController : Controller
     {
       Stop();
     }
-    base.Play();
+    //base.Play();
     _coroutine = StartCoroutine(Run());
   }
 
@@ -90,37 +90,33 @@ public class MobileVRController : Controller
               handValues.handWorldLandmarks[0].Landmark[i].Y * -scale, handValues.handWorldLandmarks[0].Landmark[i].Z * scale * 1.5f) - bottomLeft;
           }
 
-          cube[5].transform.position = new Vector3(handValues.handWorldLandmarks[0].Landmark[5].X * scale * negate,
-              handValues.handWorldLandmarks[0].Landmark[5].Y * -scale, handValues.handWorldLandmarks[0].Landmark[5].Z * scale) - bottomLeft;
-          cube[5].transform.position += new Vector3(screenOffset.x * 40 * negate, screenOffset.y * -20);
+          if (isTracking)
+          {
+            cube[5].transform.position = new Vector3(handValues.handWorldLandmarks[0].Landmark[5].X * scale * negate,
+                handValues.handWorldLandmarks[0].Landmark[5].Y * -scale, handValues.handWorldLandmarks[0].Landmark[5].Z * scale) - bottomLeft;
 
-          //get the vector from index finger tip to index finger base
-          var dir = landmarks[(int)LANDMARK.INDEX_FINGER_TIP] - landmarks[(int)LANDMARK.INDEX_FINGER_MCP];
+            cube[5].transform.position += new Vector3(screenOffset.x * 40 * negate, screenOffset.y * -20);
 
-          //var mid = (dir / 2.0f) + landmarks[(int)LANDMARK.INDEX_FINGER_MCP];
+            //get the vector from index finger tip to index finger base
+            var dir = landmarks[(int)LANDMARK.INDEX_FINGER_TIP] - landmarks[(int)LANDMARK.INDEX_FINGER_MCP];
 
-          cube[5].transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-          cube[5].transform.rotation *= Quaternion.Euler(new Vector3(30 * negate, 0, 0));
-          
-          //cube[5].transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
-
-          //Vector3 currentOffset = cube[5].transform.InverseTransformPoint(landmarks[(int)LANDMARK.INDEX_FINGER_MCP]);
-          //Vector3 targetOffset = cube[5].transform.InverseTransformPoint(landmarks[(int)LANDMARK.INDEX_FINGER_TIP]);
-          //cube[5].transform.rotation = Quaternion.FromToRotation(currentOffset, targetOffset);
-          //cube[0].transform.position = new Vector3(offset.X, offset.Y, offset.Z) * scale;
+            cube[5].transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+          }
 
           GetGestures(landmarks);
+          Debug.Log("Getting Gestures");
 
           gestureText.text = "None";
 
           if (isIndexUp && isMiddleUp && !isRingUp && !isPinkyUp)
           {
-            Debug.Log("Peace Sign");
+            //Debug.Log("Peace Sign");
             gestureText.text = "Peace Sign";
           }
           else if (isIndexUp && isPinkyUp && !isMiddleUp && !isRingUp) {
-            Debug.Log("Rock and Roll");
             gestureText.text = "Rock and Roll";
+            EventSystem.current.GameStart();
+            base.Play();
           }
           else if (isIndexUp && !isMiddleUp && !isRingUp && !isPinkyUp)
           {
